@@ -38,13 +38,6 @@ All data stays in your browser. Nothing is sent anywhere.
 
 ## License
 
-MIT
-
-```
-
-And here's the MIT LICENSE file:
-```
-
 MIT License
 
 Copyright (c) 2026 Ivan
