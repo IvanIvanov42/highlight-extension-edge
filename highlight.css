@@ -1,4 +1,18 @@
 .string-highlight {
-  background-color: #ffff00 !important;
   font-weight: bold !important;
+}
+
+.string-highlight-yellow {
+  background-color: #ffff00 !important;
+  color: #000 !important;
+}
+
+.string-highlight-red {
+  background-color: #ff0000 !important;
+  color: #fff !important;
+}
+
+.string-highlight-black {
+  background-color: #000000 !important;
+  color: #fff !important;
 }

@@ -44,7 +44,6 @@ function processTextNodes(element) {
     NodeFilter.SHOW_TEXT,
     {
       acceptNode: function (node) {
-        // Skip script, style elements, and already highlighted elements
         const parent = node.parentElement;
         if (
           !parent ||
@@ -68,21 +67,21 @@ function processTextNodes(element) {
     const textLower = text.toLowerCase();
 
     // Check if any watched string is in this text
-    for (let watchedString of watchedStrings) {
-      if (textLower.includes(watchedString.toLowerCase())) {
-        nodesToProcess.push({ node, watchedString });
+    for (let item of watchedStrings) {
+      if (textLower.includes(item.text.toLowerCase())) {
+        nodesToProcess.push({ node, item });
         break;
       }
     }
   }
 
   // Process nodes
-  nodesToProcess.forEach(({ node, watchedString }) => {
-    highlightTextInNode(node, watchedString);
+  nodesToProcess.forEach(({ node, item }) => {
+    highlightTextInNode(node, item.text, item.style);
   });
 }
 
-function highlightTextInNode(textNode, searchString) {
+function highlightTextInNode(textNode, searchString, style) {
   if (!textNode.parentNode) return;
 
   const text = textNode.textContent;
@@ -112,7 +111,7 @@ function highlightTextInNode(textNode, searchString) {
     // Highlighted match
     const matchedText = text.substring(index, index + searchString.length);
     const span = document.createElement("span");
-    span.className = "string-highlight";
+    span.className = `string-highlight string-highlight-${style}`;
     span.textContent = matchedText;
     fragments.push(span);
 
@@ -155,7 +154,7 @@ observer = new MutationObserver(function (mutations) {
   isHighlighting = true;
   observer.disconnect();
 
-  // Only process added nodes, not the entire page
+  // Only process added nodes
   mutations.forEach((mutation) => {
     mutation.addedNodes.forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
@@ -164,9 +163,9 @@ observer = new MutationObserver(function (mutations) {
         const text = node.textContent;
         const textLower = text.toLowerCase();
 
-        for (let watchedString of watchedStrings) {
-          if (textLower.includes(watchedString.toLowerCase())) {
-            highlightTextInNode(node, watchedString);
+        for (let item of watchedStrings) {
+          if (textLower.includes(item.text.toLowerCase())) {
+            highlightTextInNode(node, item.text, item.style);
             break;
           }
         }

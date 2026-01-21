@@ -2,58 +2,248 @@
 <html>
   <head>
     <style>
-      body {
-        width: 300px;
-        padding: 15px;
-        font-family: Arial, sans-serif;
-      }
-      input {
-        width: 100%;
-        padding: 8px;
-        margin-bottom: 10px;
+      * {
+        margin: 0;
+        padding: 0;
         box-sizing: border-box;
       }
+
+      body {
+        width: 350px;
+        padding: 20px;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial,
+          sans-serif;
+        background: #f5f5f5;
+      }
+
+      h2 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .input-group {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        margin-bottom: 10px;
+        transition: border-color 0.2s;
+      }
+
+      input[type="text"]:focus {
+        outline: none;
+        border-color: #0078d4;
+      }
+
+      .style-selector {
+        margin-bottom: 10px;
+      }
+
+      .style-selector label {
+        display: block;
+        font-size: 12px;
+        color: #666;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .style-options {
+        display: flex;
+        gap: 8px;
+      }
+
+      .style-option {
+        flex: 1;
+        padding: 8px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+
+      .style-option:hover {
+        border-color: #0078d4;
+      }
+
+      .style-option.selected {
+        border-color: #0078d4;
+        box-shadow: 0 0 0 1px #0078d4;
+      }
+
+      .style-yellow {
+        background: #ffff00;
+        color: #000;
+      }
+
+      .style-red {
+        background: #ff0000;
+        color: #fff;
+      }
+
+      .style-black {
+        background: #000000;
+        color: #fff;
+      }
+
       button {
         width: 100%;
-        padding: 8px;
+        padding: 10px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+
+      #addBtn {
         background: #0078d4;
         color: white;
-        border: none;
-        cursor: pointer;
       }
-      button:hover {
+
+      #addBtn:hover {
         background: #005a9e;
       }
-      #watchList {
-        margin-top: 15px;
+
+      #addBtn:active {
+        transform: scale(0.98);
       }
+
+      #watchList {
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .list-header {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+        font-weight: 500;
+      }
+
       .watched-item {
-        padding: 5px;
-        margin: 5px 0;
-        background: #f0f0f0;
+        padding: 8px 10px;
+        margin-bottom: 6px;
+        background: #f8f8f8;
+        border-radius: 6px;
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 10px;
+        transition: background 0.2s;
       }
+
+      .watched-item:hover {
+        background: #f0f0f0;
+      }
+
+      .watched-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .watched-text {
+        font-size: 14px;
+        color: #333;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 500;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .watched-text.style-yellow {
+        background: #ffff00;
+        color: #000;
+      }
+
+      .watched-text.style-red {
+        background: #ff0000;
+        color: #fff;
+      }
+
+      .watched-text.style-black {
+        background: #000000;
+        color: #fff;
+      }
+
       .remove-btn {
-        background: #d13438;
+        background: #ff4444;
         color: white;
         border: none;
-        padding: 2px 8px;
+        padding: 5px 10px;
+        border-radius: 4px;
         cursor: pointer;
-        font-size: 12px;
+        font-size: 11px;
+        font-weight: 600;
+        transition: all 0.2s;
+        white-space: nowrap;
+        flex-shrink: 0;
+        width: auto;
       }
-      h3 {
-        margin-top: 0;
+
+      .remove-btn:hover {
+        background: #cc0000;
+      }
+
+      .remove-btn:active {
+        transform: scale(0.95);
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 20px;
+        color: #999;
+        font-size: 14px;
       }
     </style>
   </head>
   <body>
-    <h3>Highlight Strings</h3>
-    <input type="text" id="stringInput" placeholder="Enter text to highlight" />
-    <button id="addBtn">Add to Watch List</button>
+    <h2>String Highlighter</h2>
 
-    <div id="watchList"></div>
+    <div class="input-group">
+      <input
+        type="text"
+        id="stringInput"
+        placeholder="Enter text to highlight"
+      />
+
+      <div class="style-selector">
+        <label>Highlight Style:</label>
+        <div class="style-options">
+          <div class="style-option style-yellow selected" data-style="yellow">
+            Yellow
+          </div>
+          <div class="style-option style-red" data-style="red">Red</div>
+          <div class="style-option style-black" data-style="black">Black</div>
+        </div>
+      </div>
+
+      <button id="addBtn">Add to Watch List</button>
+    </div>
+
+    <div id="watchList">
+      <div class="list-header">Watched Strings</div>
+      <div id="listContent"></div>
+    </div>
 
     <script src="popup.js"></script>
   </body>
