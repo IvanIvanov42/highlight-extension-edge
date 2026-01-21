@@ -32,6 +32,10 @@ That's it. The text will be highlighted on every page you visit.
 
 All data stays in your browser. Nothing is sent anywhere.
 
+## Attribution
+
+<a href="https://www.flaticon.com/free-icons/marker" title="marker icons">Marker icons created by srip - Flaticon</a>
+
 ## License
 
 MIT
