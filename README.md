@@ -1,4 +1,4 @@
-# String Highlighter
+# HighlightKit
 
 Highlight specific text on any webpage. Useful for monitoring live feeds, tracking keywords, or making important info stand out.
 

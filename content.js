@@ -189,4 +189,4 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 
 // Initial load
 loadWatchedStrings();
-console.log("String Highlighter extension loaded");
+console.log("HighlightKit in action!");
