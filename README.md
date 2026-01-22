@@ -28,6 +28,16 @@ Highlight specific text on any webpage. Useful for monitoring live feeds, tracki
 
 That's it. The text will be highlighted on every page you visit.
 
+## Screenshots
+
+Popup:
+
+<img width="640" height="400" alt="HighlightKit_Popup" src="https://github.com/user-attachments/assets/3268a4b6-aedd-4e05-9bd3-668297d14242" />
+
+HighlightKit in action:
+
+<img width="640" height="400" alt="HighlightKit_InAction_WhiteMode" src="https://github.com/user-attachments/assets/88c75c7b-bc88-4dd2-9fce-3a257aca10a5" />
+
 ## Privacy
 
 All data stays in your browser. Nothing is sent anywhere.
